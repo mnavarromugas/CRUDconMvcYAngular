@@ -1,1 +1,65 @@
-<p>publicidad-detail works!</p>
+<div style="width: 400px; margin: auto;">
+  <div *ngIf="publicidadActual" class="edit-form">
+    <h4>Publicidad</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Titulo</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="publicidadActual.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Descripcion</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="publicidadActual.description"
+          name="description"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ publicidadActual.published ? "Publicado" : "Pendiente" }}
+      </div>
+    </form>
+
+    <button
+      class="badge badge-primary mr-2"
+      *ngIf="publicidadActual.published"
+      (click)="updatePublicado(false)"
+    >
+      UnPublish
+    </button>
+    <button
+      *ngIf="!publicidadActual.published"
+      class="badge badge-primary mr-2"
+      (click)="updatePublicado(true)"
+    >
+      Publish
+    </button>
+
+    <button class="badge badge-danger mr-2" (click)="deletePublicidad()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success"
+      (click)="updatePublicidad()"
+    >
+      Update
+    </button>
+    <p>{{ mensaje }}</p>
+  </div>
+
+  <div *ngIf="!publicidadActual">
+    <br />
+    <p>No se puede acceder a esta publicidad...</p>
+  </div>
+</div>

@@ -1,1 +1,63 @@
-<p>publicidad-list works!</p>
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="buscarTitulo()"
+        >
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Lista de Publicidades</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let publicidad of publicidades; let i = index"
+        [class.active]="i == indiceActual"
+        (click)="setPublicidadActiva(publicidad, i)"
+      >
+        {{ publicidad.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPublicidades()">
+      Borrar todas
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="publicidadActual">
+      <h4>Publicidad</h4>
+      <div>
+        <label><strong>Titulo:</strong></label> {{ publicidadActual.title }}
+      </div>
+      <div>
+        <label><strong>Descripcion:</strong></label>
+        {{ publicidadActual.description }}
+      </div>
+      <div>
+        <label><strong>Estado:</strong></label>
+        {{ publicidadActual.published ? "Publicado" : "Pendiente" }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/publicidades/{{ publicidadActual.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!publicidadActual">
+      <br />
+      <p>Por favor seleccione una publicidad...</p>
+    </div>
+  </div>
+</div>
