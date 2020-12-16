@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web.Razor.Generator;
 using System.Web.WebPages;
 
@@ -7,6 +8,8 @@ namespace CRUDapp.Models
 {
     public static class Gateway
     {
+        private static int IdGenerator = 3;
+
         public static List<Publicidad> Lista { get; set; } = new List<Publicidad>
         {
             new Publicidad() {description = "hola", id = "1", published = false, title = "hola"},
@@ -15,6 +18,9 @@ namespace CRUDapp.Models
 
         public static void Add(Publicidad p)
         {
+            p.id = IdGenerator.ToString();
+            IdGenerator++;
+
             Lista.Add(p);
         }
 
@@ -25,6 +31,8 @@ namespace CRUDapp.Models
 
         public static void update(string id, Publicidad p)
         {
+            p.id = id; //le agrego un id al modificar
+
             Lista = Lista.Where(w => w.id == id).Select(s => p).Union(Lista.Where(w => w.id != id)).ToList();
         }
 
