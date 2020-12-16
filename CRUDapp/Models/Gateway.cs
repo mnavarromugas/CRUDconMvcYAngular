@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Razor.Generator;
+using System.Web.WebPages;
 
 namespace CRUDapp.Models
 {
@@ -38,5 +39,9 @@ namespace CRUDapp.Models
         }
 
 
+        public static List<Publicidad> FindByTitle(string t)
+        {
+            return t.IsEmpty() ? new List<Publicidad>() : Lista.FindAll(x => x.title.Contains(t));
+        }
     }
 }

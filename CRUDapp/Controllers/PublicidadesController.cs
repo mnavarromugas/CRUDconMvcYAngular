@@ -13,10 +13,15 @@ namespace CRUDapp.Controllers
             return Ok(Gateway.Lista);
         }
 
-        // GET api/values/5
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get([FromUri(Name = "title")] string title) {
+            var p = Gateway.FindByTitle(title);
+            if (p == null) return BadRequest();
+            return Ok(p);
+        }
+
+        public IHttpActionResult Get(int id)
         {
-            var p = Gateway.Find(id);
+            var p = Gateway.Find(id.ToString());
             if (p == null) return BadRequest();
             return Ok(p);
         }
