@@ -24,7 +24,7 @@
       </div>
 
       <div class="form-group">
-        <label><strong>Status:</strong></label>
+        <label><strong>Estado:</strong></label>
         {{ publicidadActual.published ? "Publicado" : "Pendiente" }}
       </div>
     </form>
@@ -34,18 +34,18 @@
       *ngIf="publicidadActual.published"
       (click)="updatePublicado(false)"
     >
-      UnPublish
+      Pendiente
     </button>
     <button
       *ngIf="!publicidadActual.published"
       class="badge badge-primary mr-2"
       (click)="updatePublicado(true)"
     >
-      Publish
+      Publicar
     </button>
 
     <button class="badge badge-danger mr-2" (click)="deletePublicidad()">
-      Delete
+      Borrar
     </button>
 
     <button
@@ -53,7 +53,7 @@
       class="badge badge-success"
       (click)="updatePublicidad()"
     >
-      Update
+      Actualizar
     </button>
     <p>{{ mensaje }}</p>
   </div>
